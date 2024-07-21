@@ -8,12 +8,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'spaceman_scores',
-    password: 'password',
-    port: 5432,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
+
 
 pool.connect((err) => {
     if (err) {
