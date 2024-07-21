@@ -9,16 +9,40 @@ app.use(express.urlencoded({ extended: false }));
 
 const { Pool } = require('pg');
 
+const { Pool } = require('pg');
+
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
+    user: 'postgres',
+    host: 'localhost',
+    database: 'spaceman_scores',
+    password: 'password',
+    port: 5432,
 });
 
-module.exports = pool;
+async function setupDatabase() {
+    try {
+        const client = await pool.connect();
+        await client.query(`
+            CREATE TABLE IF NOT EXISTS user_scores (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(50),
+                score INT,
+                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+            );
+            CREATE TABLE IF NOT EXISTS words (
+                id SERIAL PRIMARY KEY,
+                word VARCHAR(50),
+                hint TEXT
+            );
+        `);
+        console.log('Database setup complete');
+        client.release();
+    } catch (err) {
+        console.error('Error setting up database', err);
+    }
+}
 
-
+setupDatabase();
 
 pool.connect((err) => {
     if (err) {
