@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Home Page</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        label, input, button {
+            margin-bottom: 10px;
+        }
+        .high-scores {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .high-scores table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .high-scores th, .high-scores td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Spaceman "Hangman" Game</h1>
+        </header>
+        <main>
+            <form id="username-form">
+                <label for="username">Enter Your Username:</label>
+                <input type="text" id="username" name="username" required>
+                <button type="submit">Start Game</button>
+            </form>
+            <div class="high-scores">
+                <h2>High Scores</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody id="high-scores-body">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.getElementById('username-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            if (username) {
+                localStorage.setItem('username', username);
+                window.location.href = 'index.html';
+            }
+        });
+
+        function loadHighScores() {
+            fetch('/api/high-scores')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const highScoresBody = document.getElementById('high-scores-body');
+                        highScoresBody.innerHTML = '';
+                        data.highScores.forEach(score => {
+                            highScoresBody.innerHTML += `
+                                <tr>
+                                    <td>${score.username}</td>
+                                    <td>${score.score}</td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        console.error('Failed to fetch high scores:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching high scores:', error);
+                });
+        }
+        loadHighScores();
+    </script>
+</body>
+</html>
