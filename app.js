@@ -77,7 +77,7 @@ app.get('/api/high-scores', async (req, res) => {
     try {
         const client = await pool.connect();
         const result = await client.query(
-            'SELECT username, score FROM user_scores ORDER BY score DESC LIMIT 5'
+            'SELECT username, score FROM user_scores ORDER BY score DESC LIMIT 25'
         );
         client.release();
         res.json({ success: true, highScores: result.rows });
