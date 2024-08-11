@@ -13,8 +13,6 @@ let score = 0;
 let word = '';
 let maxGuesses = 5;
 let scoreSaved = false;
-let gameInProgress = false;
-
 const username = localStorage.getItem('username');
 
 function createKeyboard() {
@@ -29,9 +27,6 @@ function createKeyboard() {
 }
 
 async function playGame() {
-    if (gameInProgress) return;
-
-    gameInProgress = true;
     scoreSaved = false;
     img.src = 'assets/images/rocket1.jpg';
     createKeyboard();
@@ -42,7 +37,6 @@ async function playGame() {
         if (data.success) {
             if (data.words.length === 0) {
                 message.innerText = 'No words available.';
-                gameInProgress = false;
                 return;
             }
             const randIndex = Math.floor(Math.random() * data.words.length);
@@ -67,11 +61,9 @@ async function playGame() {
             updateScoreDisplay();
         } else {
             message.innerText = 'Failed to load words.';
-            gameInProgress = false;
         }
     } catch (error) {
         console.error('Error loading words:', error);
-        gameInProgress = false;
     }
 }
 
@@ -97,7 +89,6 @@ function handleLetterClick(letter) {
                             scoreSaved = true;
                         }
                         setTimeout(playGame, 6500);
-                        return;
                     }
                 }
             }
@@ -121,7 +112,6 @@ function handleLetterClick(letter) {
                     scoreSaved = true;
                 }
                 setTimeout(playGame, 6500);
-                return;
             }
         } else {
             message.innerText = 'You already guessed that letter!';
