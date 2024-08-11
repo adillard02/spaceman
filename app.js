@@ -7,19 +7,12 @@ app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const { Pool } = require('pg');
-
-const { Pool } = require('pg');
-
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'spaceman_scores',
-    password: 'password',
-    port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
-
-
 
 
 async function setupDatabase() {
