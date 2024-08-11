@@ -12,6 +12,7 @@ let guessLtrArr = [];
 let score = 0;
 let word = '';
 let maxGuesses = 5;
+let scoreSaved = false;
 const username = localStorage.getItem('username');
 
 function createKeyboard() {
@@ -26,6 +27,7 @@ function createKeyboard() {
 }
 
 async function playGame() {
+    scoreSaved = false;
     img.src = 'assets/images/rocket1.jpg';
     createKeyboard();
 
@@ -82,7 +84,10 @@ function handleLetterClick(letter) {
                         message.innerText = 'Good Job! Preparing next word.';
                         disableKeyboard();
                         img.src = 'assets/images/rocket2.gif';
-                        saveScore(username, score);
+                        if (!scoreSaved) {
+                            saveScore(username, score);
+                            scoreSaved = true;
+                        }
                         setTimeout(playGame, 6500);
                     }
                 }
@@ -102,7 +107,10 @@ function handleLetterClick(letter) {
                 message.innerText = 'Game Over!';
                 disableKeyboard();
                 img.src = 'assets/images/rocket3.gif';
-                saveScore(username, score);
+                if (!scoreSaved) {
+                    saveScore(username, score);
+                    scoreSaved = true;
+                }
                 setTimeout(playGame, 6500);
             }
         } else {
@@ -111,7 +119,7 @@ function handleLetterClick(letter) {
     }
 
     if (alphabetLtrs.includes(letter)) {
-        usedLetters.innerText += letter + ', '; // Adding space after comma
+        usedLetters.innerText += letter + ', ';
     }
 }
 

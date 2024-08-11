@@ -14,30 +14,6 @@ const pool = new Pool({
   }
 });
 
-
-async function setupDatabase() {
-    try {
-        const client = await pool.connect();
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS user_scores (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(50),
-                score INT,
-                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-            );
-            CREATE TABLE IF NOT EXISTS words (
-                id SERIAL PRIMARY KEY,
-                word VARCHAR(50),
-                hint TEXT
-            );
-        `);
-        console.log('Database setup complete');
-        client.release();
-    } catch (err) {
-        console.error('Error setting up database', err);
-    }
-}
-
 setupDatabase();
 
 pool.connect((err) => {
