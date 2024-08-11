@@ -84,10 +84,6 @@ function handleLetterClick(letter) {
                         message.innerText = 'Good Job! Preparing next word.';
                         disableKeyboard();
                         img.src = 'assets/images/rocket2.gif';
-                        if (!scoreSaved) {
-                            saveScore(username, score);
-                            scoreSaved = true;
-                        }
                         setTimeout(playGame, 6500);
                     }
                 }
@@ -176,7 +172,10 @@ function disableKeyboard() {
 }
 
 endGameBtn.addEventListener('click', () => {
-    saveScore(username, score);
+    if (!scoreSaved) {
+        saveScore(username, score);
+        scoreSaved = true;
+    }
     window.location.href = 'home.html';
 });
 
