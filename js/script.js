@@ -146,7 +146,7 @@ function gameOver() {
     clearInterval(timer);
     setTimeout(() => {
         window.location.href = 'home.html';
-    }, 3500);
+    }, 4500);
 }
 
 function saveScore(username, score) {
