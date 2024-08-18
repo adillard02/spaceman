@@ -15,6 +15,8 @@ let maxGuesses = 5;
 let scoreSaved = false;
 const username = localStorage.getItem('username');
 let timer;
+let timeLeft = 30;
+const countdownDisplay = document.getElementById('countdown');
 
 function createKeyboard() {
     keyboard.innerHTML = '';
@@ -28,19 +30,27 @@ function createKeyboard() {
 }
 
 function startTimer() {
-    clearTimeout(timer);
-    timer = setTimeout(() => {
-        message.innerText = 'Time is up! Game Over!';
-        disableKeyboard();
-        img.src = 'assets/images/rocket3.gif';
-        score = 0;
-        updateScoreDisplay();
-        if (!scoreSaved) {
-            saveScore(username, score);
-            scoreSaved = true;
+    timeLeft = 30;
+    countdownDisplay.innerText = `Time Left: ${timeLeft}s`;
+    clearInterval(timer);
+
+    timer = setInterval(() => {
+        timeLeft--;
+        countdownDisplay.innerText = `Time Left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            message.innerText = 'Time is up! Game Over!';
+            disableKeyboard();
+            img.src = 'assets/images/rocket3.gif';
+            score = 0;
+            updateScoreDisplay();
+            if (!scoreSaved) {
+                saveScore(username, score);
+                scoreSaved = true;
+            }
+            setTimeout(playGame, 6500);
         }
-        setTimeout(playGame, 6500);
-    }, 30000);
+    }, 1000);
 }
 
 async function playGame() {
@@ -86,7 +96,7 @@ async function playGame() {
 }
 
 function handleLetterClick(letter) {
-    clearTimeout(timer);
+    clearInterval(timer);
     startTimer();
 
     console.log(`Letter clicked: ${letter}`);
@@ -105,7 +115,7 @@ function handleLetterClick(letter) {
                         message.innerText = 'Good Job! Preparing next word.';
                         disableKeyboard();
                         img.src = 'assets/images/rocket2.gif';
-                        clearTimeout(timer);
+                        clearInterval(timer);
                         setTimeout(playGame, 6500);
                     }
                 }
@@ -131,6 +141,7 @@ function handleLetterClick(letter) {
                     saveScore(username, score);
                     scoreSaved = true;
                 }
+                clearInterval(timer);
                 setTimeout(playGame, 6500);
             }
         } else {
