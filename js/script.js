@@ -14,10 +14,7 @@ let word = '';
 let maxGuesses = 5;
 let scoreSaved = false;
 const username = localStorage.getItem('username');
-
 let timer;
-let timeLeft = 15;
-let timerDisplay = document.querySelector('.timer');
 
 function createKeyboard() {
     keyboard.innerHTML = '';
@@ -31,23 +28,25 @@ function createKeyboard() {
 }
 
 function startTimer() {
-    timeLeft = 15;
-    timerDisplay.innerText = `Time Left: ${timeLeft}s`;
-    timer = setInterval(() => {
-        timeLeft--;
-        timerDisplay.innerText = `Time Left: ${timeLeft}s`;
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            gameOver();
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+        message.innerText = 'Time is up! Game Over!';
+        disableKeyboard();
+        img.src = 'assets/images/rocket3.gif';
+        score = 0;
+        updateScoreDisplay();
+        if (!scoreSaved) {
+            saveScore(username, score);
+            scoreSaved = true;
         }
-    }, 1000);
+        setTimeout(playGame, 6500);
+    }, 30000);
 }
 
 async function playGame() {
     scoreSaved = false;
     img.src = 'assets/images/rocket1.jpg';
     createKeyboard();
-    startTimer();
 
     try {
         const response = await fetch('/api/words');
@@ -77,6 +76,7 @@ async function playGame() {
             guessesLeft.innerHTML = 'Guesses Left: ' + maxGuesses;
             message.innerText = 'Correctly select the letters to launch the rocket.';
             updateScoreDisplay();
+            startTimer();
         } else {
             message.innerText = 'Failed to load words.';
         }
@@ -86,6 +86,9 @@ async function playGame() {
 }
 
 function handleLetterClick(letter) {
+    clearTimeout(timer);
+    startTimer();
+
     console.log(`Letter clicked: ${letter}`);
     if (word.includes(letter)) {
         if (!guessLtrArr.includes(letter)) {
@@ -101,8 +104,8 @@ function handleLetterClick(letter) {
                     if (word.length === guessLtrArr.length) {
                         message.innerText = 'Good Job! Preparing next word.';
                         disableKeyboard();
-                        clearInterval(timer);
                         img.src = 'assets/images/rocket2.gif';
+                        clearTimeout(timer);
                         setTimeout(playGame, 6500);
                     }
                 }
@@ -121,8 +124,9 @@ function handleLetterClick(letter) {
             if (maxGuesses <= 0) {
                 message.innerText = 'Game Over!';
                 disableKeyboard();
-                clearInterval(timer);
                 img.src = 'assets/images/rocket3.gif';
+                score = 0;
+                updateScoreDisplay();
                 if (!scoreSaved) {
                     saveScore(username, score);
                     scoreSaved = true;
@@ -142,17 +146,7 @@ function handleLetterClick(letter) {
 function updateScoreDisplay() {
     document.getElementById('score').innerText = 'Score: ' + score;
 }
-function gameOver() {
-    message.innerText = 'Time\'s up! Game Over!';
-    disableKeyboard();
-    img.src = 'assets/images/rocket3.gif';
-    if (!scoreSaved) {
-        saveScore(username, score);
-        scoreSaved = true;
-    }
-    clearInterval(timer);
-    setTimeout(playGame, 6500);
-}
+
 function saveScore(username, score) {
     fetch('/api/save-score', {
         method: 'POST',
