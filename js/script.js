@@ -119,15 +119,7 @@ function handleLetterClick(letter) {
             updateScoreDisplay();
 
             if (maxGuesses <= 0) {
-                message.innerText = 'Game Over!';
-                disableKeyboard();
-                clearInterval(timer);
-                img.src = 'assets/images/rocket3.gif';
-                if (!scoreSaved) {
-                    saveScore(username, score);
-                    scoreSaved = true;
-                }
-                setTimeout(playGame, 6500);
+                gameOver();
             }
         } else {
             message.innerText = 'You already guessed that letter!';
@@ -144,7 +136,7 @@ function updateScoreDisplay() {
 }
 
 function gameOver() {
-    message.innerText = 'Time\'s up! Game Over!';
+    message.innerText = 'Game Over!';
     disableKeyboard();
     img.src = 'assets/images/rocket3.gif';
     if (!scoreSaved) {
@@ -152,7 +144,9 @@ function gameOver() {
         scoreSaved = true;
     }
     clearInterval(timer);
-    setTimeout(playGame, 6500);
+    setTimeout(() => {
+        window.location.href = 'home.html';
+    }, 3000);
 }
 
 function saveScore(username, score) {
