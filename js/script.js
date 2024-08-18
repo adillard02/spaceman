@@ -16,7 +16,7 @@ let scoreSaved = false;
 const username = localStorage.getItem('username');
 
 let timer;
-let timeLeft = 15;
+let timeLeft = 30;
 let timerDisplay = document.querySelector('.timer');
 
 function createKeyboard() {
@@ -31,7 +31,7 @@ function createKeyboard() {
 }
 
 function startTimer() {
-    timeLeft = 15;
+    timeLeft = 30;
     timerDisplay.innerText = `Time Left: ${timeLeft}s`;
     timer = setInterval(() => {
         timeLeft--;
@@ -146,7 +146,7 @@ function gameOver() {
     clearInterval(timer);
     setTimeout(() => {
         window.location.href = 'home.html';
-    }, 3000);
+    }, 3500);
 }
 
 function saveScore(username, score) {
