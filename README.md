@@ -3,25 +3,31 @@
 
 
 ## Overview
-The Spaceman "Hangman" game is a simple yet engaging web-based game inspired by the classic hangman format. Players try to guess a hidden word one letter at a time while launching a spaceship by making correct guesses. Incorrect guesses result in the spaceship getting closer to "crashing". The game ends when the spaceship explodes or the word is guessed correctly and it launches.
+The Spaceman "Hangman" Game is a web-based word-guessing game inspired by the classic "Hangman." Players attempt to guess a hidden word by selecting letters within a limited number of tries. The game features a space theme, where a spaceship image changes based on the player’s progress.
 
-This README will guide you through the game's purpose, how to set it up, and the available features.
+This README will guide you through the game's purpose, how it works and the available features.
 
 ## Features
-- Interactive Gameplay: Players guess letters to uncover a hidden word, with visual feedback and updates on their progress.
-- High Scores: Scores are saved and displayed on a leaderboard, motivating players to achieve higher scores.
-- Hints: Each word comes with a hint to help players make educated guesses.
-- Play Again Option: Players can easily start a new game after finishing one.
+- Username entry to personalize gameplay.
+- Random word generation with hints to guide players.
+- Virtual on-screen keyboard for letter selection.
+- Real-time score updates and tracking.
+- Lives system with five chances per word.
+- Timer with 30 seconds per word.
+- Animated spaceship that changes based on progress.
+- High scores saved and displayed on the home page.
 
 ## Technology Stack
-- Frontend: HTML, CSS, JavaScript
-- Backend: Node.js with Express.js
-- Database: PostgreSQL
-- Hosting: Heroku
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Node.js with Express.js
+- **Database:** PostgreSQL
+- **Hosting:** Heroku
 
 ## Game Play
-- Start a Game: Click on "Play Again" to start a new game.
-- Guess Letters: Click on the letters on the keyboard to make guesses. Correct guesses will reveal letters in the hidden word, while incorrect guesses reduce the number of attempts left.
-- Hints: A hint will be provided to help you guess the word.
-- Game Over: The game ends either when you guess the word or run out of attempts. Your score will be saved and displayed on the high scores leaderboard.
-- End Game: Click "End Game" to save your score and return to the home page.
+- Enter a username to begin the game.
+- Guess the hidden word by selecting letters using the on-screen keyboard.
+- Each correct guess fills in the corresponding letter in the word.
+- Each incorrect guess decreases your remaining lives.
+- Earn or lose points based on correct or incorrect guesses.
+- Complete the word before time runs out or it's game over.
+- Scores are saved and the top 5 can be viewed on the home page.
