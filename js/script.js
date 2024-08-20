@@ -1,6 +1,5 @@
 const alphabetLtrs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const inputBoxes = document.querySelector('.input-boxes');
-const playAgainBtn = document.querySelector('.play-again-button');
 const endGameBtn = document.querySelector('.end-game-button');
 const hint = document.querySelector('.hint');
 const guessesLeft = document.querySelector('.guesses-left');
@@ -204,7 +203,5 @@ endGameBtn.addEventListener('click', () => {
     }
     window.location.href = 'home.html';
 });
-
-playAgainBtn.addEventListener('click', playGame);
 
 playGame();
