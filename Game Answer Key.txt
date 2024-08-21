@@ -1,0 +1,45 @@
+GALAXY		billions of stars held together by gravitational attraction
+NEPTUNE		blue gas giant
+RIGEL		brightest star in the constellation Orion
+POLARIS		brightest star in the constellation Ursa Minor
+SIRIUS		brightest star in the night sky
+OBSERVATORY	building designed for observing astronomical events
+MERCURY		closest planet to the sun
+ORION		constellation named after a hunter in Greek mythology
+ANDROMEDA	constellation named after the princess in Greek mythology
+TAURUS		constellation representing a bull
+SAGITTARIUS	constellation representing a centaur archer
+DRACO		constellation representing a dragon
+LEO		constellation representing a lion
+LYRA		constellation representing a lyre
+VIRGO		constellation representing a virgin
+AQUARIUS	constellation representing a water-bearer
+PISCES		constellation representing fish
+GEMINI		constellation representing twins
+PLUTO		dwarf planet once considered the ninth planet in the solar system
+ULTRAVIOLET	electromagnetic radiation beyond visible light
+ECLIPSE		event where one celestial body moves into the shadow of another
+SUPERNOVA	explosion of a star
+METEORITE	fragment of a meteoroid that survives its passage through the atmosphere
+CONSTELLATION	group of stars forming a recognizable pattern
+COMET		icy body that releases gas or dust
+TELESCOPE	instrument used to observe distant objects
+NEBULA		interstellar cloud of dust, hydrogen, helium, and other gases
+JUPITER		largest planet in our solar system
+INTERSTELLAR	occurring or situated between stars
+ORBIT		path of a celestial body or spacecraft around a star, planet, or moon
+SATURN		planet known for its rings
+EXOPLANET	planet outside our solar system
+URANUS		planet tilted on its side
+BETELGEUSE	red supergiant star in the constellation Orion
+LUNAR		related to the moon
+ASTRONOMER	scientist who studies celestial bodies
+VENUS		second planet from the sun, known for its extreme temperatures
+ASTEROID	small rocky body orbiting a sun
+HUBBLE		space telescope launched by NASA
+ISS		the habitable artificial satellite in low Earth orbit
+SOL		the name of star at the center of our solar system
+MARS		the Red Planet
+PLANETARIUM	theater for presenting astronomical shows
+EARTH		third planet from the sun, our home planet
+COSMOS		universe as an orderly system
